@@ -60,10 +60,13 @@
     <footer ng-include="'footer.html'"></footer>
 </body>
 <script>
+
+    //pobieramy dane z cHello.js. external. to samo co w competences.html ale zaciagniete z cHello.js
     var app = angular.module("appCompetencies", []);
     app.component('hello', cHello);
     app.filter('asText', function(){
-        return function(input, reverseScale){
+        
+        return function(input, reverseScale){ 
             if(reverseScale){ //dla true
                 switch (input) {
                     case 0:

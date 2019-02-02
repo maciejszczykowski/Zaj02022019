@@ -41,6 +41,7 @@
             </div>
         </div>
     </form>
+    <!-- ten plik competencesComponent zgrac z materialów bo nie ogarnalem -->
     <div class="flex-wrap">
         <div class="card" style="width: 12rem;" ng-repeat="competence in competencies| filter: {Name: competenceSearchText} | orderBy:'-Name'" ng-if="competence.Level > 0">
             

@@ -107,6 +107,7 @@
         $scope.competenciesLevels = [1,2,3,4,5,6,7];
         $scope.competenceSearchText = "";
         $scope.searchCompetence = function(){
+            //szukamy w tekscie ale tez napisalismy aby i duze i male litery bral pod uwagę
             if($scope.competenceSearchText)
                 $scope.filteredCompetencies = $scope.competencies.filter(function(competence){
                     return competence.Name.toLowerCase().includes(
