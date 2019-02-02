@@ -1,0 +1,7 @@
+$dark-color: red;
+
+div.dark {
+    background-color: lighten($dark-color, 30);
+
+}
+//sam wygenerowal plik test.css i tam jest juz ten rozjasniony kolor o 30%
