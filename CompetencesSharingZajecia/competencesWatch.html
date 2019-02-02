@@ -29,11 +29,14 @@
     <form name="searchForm">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Podaj nazwę kompetencji</span>
+                <span class="input-group-text">Podaj nazwę kompetencji</span>
             </div>
             <input type="text" ng-model="competenceSearchText" class="form-control" placeholder="..." required>
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" ng-disabled="searchForm.$invalid" ng-click="searchCompetence()">Szukaj</button>
+                <button class="btn btn-outline-secondary" type="button"
+                        ng-disabled="searchForm.$invalid">
+                        Szukaj
+                </button>
             </div>
         </div>
     </form>
@@ -99,18 +102,20 @@
         };
     });
     app.controller("listController", function($scope){
-        $scope.competencies = competenciesList;       
-        $scope.filteredCompetencies = competenciesList.slice();       //sklonowanie tabeli
+        $scope.competencies = competenciesList;    
+        $scope.filteredCompetencies = $scope.competencies.slice(); //sklonowanie tablicy 
         $scope.competenciesLevels = [1,2,3,4,5,6,7];
-        $scope.competenceSearchText ="";
-        $scope.$watch('competenceSearchText', function(){
-                if ($scope.competenceSearchText)
+        $scope.competenceSearchText = "";
+
+        $scope.$watch("competenceSearchText", function(){ //Zamiana na watcha
+            if($scope.competenceSearchText)
                 $scope.filteredCompetencies = $scope.competencies.filter(function(competence){
-                return competence.Name.toLowerCase().includes($scope.competenceSearchText.toLowerCase());
+                    return competence.Name.toLowerCase().includes(
+                                    $scope.competenceSearchText.toLowerCase());
                 });
-            else
-                $scope.filteredCompetencies = competenciesList.slice();
-        });
+            else    
+                $scope.filteredCompetencies = $scope.competencies.slice();            
+        });        
     });
 </script>
 </html>

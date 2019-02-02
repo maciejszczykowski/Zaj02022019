@@ -13,9 +13,8 @@
 </head>
 <body ng-app="appCompetences" ng-controller="listController">
    <h3>Hello {{fullName}}</h3>
-  
    <br/>
-   Zmień imie <input type="text" ng-model="user.FirstName"/>
+   Zmień imię <input type="text" ng-model="user.FirstName"/>
    <br/>
    Zmień nazwisko <input type="text" ng-model="user.LastName"/>
 </body>
@@ -23,13 +22,11 @@
     var app = angular.module("appCompetences", []);
     app.controller("listController", function($scope){
         $scope.user = {FirstName: "Michał", LastName: "Kuciapski"};
-        $scope.fullName = $scope.user.FirstName + "" + $scope.user.LastName;
-    //watch, obserwuje zmiany na calym user czyli user.firstName oraz user.lastName
+        $scope.fullName =  $scope.user.FirstName + " " + $scope.user.LastName;
+
         $scope.$watch('user', function(){
-            $scope.fullName = $scope.user.FirstName + "" + $scope.user.LastName;
-            
+            $scope.fullName =  $scope.user.FirstName + " " + $scope.user.LastName;
         }, true);
-        
     });
 </script>
 </html>

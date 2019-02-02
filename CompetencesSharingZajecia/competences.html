@@ -26,21 +26,22 @@
     </style>
 </head>
 <body ng-app="appCompetencies" ng-controller="listController">
-    <!-- to z linku ze slajdu 41 wzielismy z bootstrapa (1 div)-->
     <form name="searchForm">
         <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Podaj nazwę kompetencji</span>
-                </div>
-                <input ng-keyup="searchCompetence()" type="text" ng-model="competenceSearchText" class="form-control" placeholder="..." required>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" ng-disabled="searchForm.$invalid" ng-click="searchCompetence()">Szukaj</button>
-                </div>
-              </div>
+            <div class="input-group-prepend">
+                <span class="input-group-text">Podaj nazwę kompetencji</span>
+            </div>
+            <input type="text" ng-model="competenceSearchText" class="form-control" placeholder="..." required>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"
+                        ng-disabled="searchForm.$invalid">
+                        Szukaj
+                </button>
+            </div>
+        </div>
     </form>
-
     <div class="flex-wrap">
-        <div class="card" style="width: 12rem;" ng-repeat="competence in filteredCompetencies| orderBy:'-Name'" ng-if="competence.Level > 0">
+        <div class="card" style="width: 12rem;" ng-repeat="competence in competencies| filter: {Name: competenceSearchText} | orderBy:'-Name'" ng-if="competence.Level > 0">
             <h4 class="card-title text-center">{{$index + 1}}. {{competence.Name | lowercase| uppercase}}</h4>
             <div class="card-body">
                 <img class="card-img-top" ng-src="{{'assets/' +  competence.Picture}}">
@@ -101,19 +102,18 @@
         };
     });
     app.controller("listController", function($scope){
-        $scope.competencies = competenciesList;       
-        $scope.filteredCompetencies = competenciesList.slice();    //sklonowanie tablicy aby moc szukac od nowa    
+        $scope.competencies = competenciesList;    
         $scope.competenciesLevels = [1,2,3,4,5,6,7];
         $scope.competenceSearchText = "";
-        $scope.searchCompetence = function(){
-           // alert($scope.competenceSearchText);
-           if ($scope.competenceSearchText)
-         $scope.filteredCompetencies = $scope.competencies.filter(function(competence){
-            return competence.Name.toLowerCase().includes($scope.competenceSearchText.toLowerCase());
-        });
-        else
-        $scope.filteredCompetencies = competenciesList.slice();
-        };
+        // $scope.$watch("competenceSearchText", function(){ //Zamiana na watcha
+        //     if($scope.competenceSearchText)
+        //         $scope.filteredCompetencies = $scope.competencies.filter(function(competence){
+        //             return competence.Name.toLowerCase().includes(
+        //                             $scope.competenceSearchText.toLowerCase());
+        //         });
+        //     else    
+        //         $scope.filteredCompetencies = $scope.competencies.slice();            
+        // });        
     });
 </script>
 </html>
