@@ -26,6 +26,19 @@
     </style>
 </head>
 <body ng-app="appCompetencies" ng-controller="listController">
+    <!-- to z linku ze slajdu 41 wzielismy z bootstrapa (1 div)-->
+    <form name="searchForm">
+        <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Podaj nazwę kompetencji</span>
+                </div>
+                <input ng-keyup="searchCompetence()" type="text" ng-model="competenceSearchText" class="form-control" placeholder="..." required>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" ng-disabled="searchForm.$invalid" ng-click="searchCompetence()">Szukaj</button>
+                </div>
+              </div>
+    </form>
+
     <div class="flex-wrap">
         <div class="card" style="width: 12rem;" ng-repeat="competence in competencies| orderBy:'-Name'" ng-if="competence.Level > 0">
             <h4 class="card-title text-center">{{$index + 1}}. {{competence.Name | lowercase| uppercase}}</h4>
@@ -90,6 +103,13 @@
     app.controller("listController", function($scope){
         $scope.competencies = competenciesList;       
         $scope.competenciesLevels = [1,2,3,4,5,6,7];
+        $scope.competenceSearchText = "";
+        $scope.searchCompetence = function(){
+           // alert($scope.competenceSearchText);
+        $scope.competencies = $scope.competencies.filter(function(competence){
+            return competence.Name.toLowerCase().includes($scope.competenceSearchText.toLowerCase());
+        });
+        };
     });
 </script>
 </html>
