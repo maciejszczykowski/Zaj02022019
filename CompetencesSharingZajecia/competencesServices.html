@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="js/angular.js"></script>
-    <script src="js/competences.js"></script>
+    <!-- <script src="js/competences.js"></script> -->
 
     <style>
         .competence-level-low{
@@ -102,28 +102,24 @@
         };
     });
     app.controller("listController", function($scope, $http){
-        $scope.competencies = competenciesList;    
+        $scope.competencies = [];
         $scope.competenciesLevels = [1,2,3,4,5,6,7];
         $scope.competenceSearchText = "";
-        //pobranie danych z serwera, dziala :) boootstrap tam wprowadzilem i ok,
-        //w visual studio robie ctrl+f5 i patrze jaki adres jest: http://localhost:20431
+        
+        //pobranie danych z serwera, boootstrap tam zmienilismy na backendzie
         $http(
             {
                 method: "GET",
                 url: "http://localhost:20431/api/Competencies/List"
             }
-        ).then (
+        ).then(
             function(response){
                 $scope.competencies = response.data;
-
             },
             function(error){
                 alert(error);
-
-            },
-            
-        )
-
+            }
+        );
 
         // $scope.$watch("competenceSearchText", function(){ //Zamiana na watcha
         //     if($scope.competenceSearchText)

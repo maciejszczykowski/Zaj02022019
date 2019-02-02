@@ -10,6 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="js/angular.js"></script>
     <script src="js/competences.js"></script>
+    <script src="js/cHello.js"></script>
 
     <style>
         .competence-level-low{
@@ -60,22 +61,7 @@
 </body>
 <script>
     var app = angular.module("appCompetencies", []);
-    app.component('hello', {
-        bindings:{
-            firstlastname: '@',
-            competence: '='
-        },
-        template: `<div class="alert alert-dismissible fade show alert-success" role="alert">
-                        Witaj <b>{{$ctrl.firstlastname}}</b> z {{$ctrl.user.Company}}
-                        specjalisto od <i>{{$ctrl.competence.Name}} </i>
-                        <button type="button" class="close" data-dismiss="alert">
-                            &times;</span>
-                        </button>
-                  </div>`,
-        controller: function(){
-            this.user = {Company: 'WSB'};
-        }
-    });
+    app.component('hello', cHello);
     app.filter('asText', function(){
         return function(input, reverseScale){
             if(reverseScale){ //dla true

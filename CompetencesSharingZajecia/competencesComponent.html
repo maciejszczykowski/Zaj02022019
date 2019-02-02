@@ -43,16 +43,7 @@
     </form>
     <div class="flex-wrap">
         <div class="card" style="width: 12rem;" ng-repeat="competence in competencies| filter: {Name: competenceSearchText} | orderBy:'-Name'" ng-if="competence.Level > 0">
-            <h4 class="card-title text-center">{{$index + 1}}. {{competence.Name | lowercase| uppercase}}</h4>
-            <div class="card-body">
-                <img class="card-img-top" ng-src="{{'assets/' +  competence.Picture}}">
-                <h6 class="card-title font-weight-bold" 
-                    ng-class="{'competence-level-low': competence.Level < 3, 
-                                'competence-level-high': competence.Level > 3}">
-                    Poziom: {{competence.Level| asText:false}}
-                </h6>
-                <p class="card-text" ng-if="competence.Description">Opis: {{competence.Description}}</p>
-            </div>
+            
         </div>
     </div>
     <div class="mt-5"></div>
@@ -65,13 +56,16 @@
             firstlastname: '@',
             competence: '='
         },
-        template: `<div class="alert alert-dismissible fade show alert-success" role="alert">
-                        Witaj <b>{{$ctrl.firstlastname}}</b> z {{$ctrl.user.Company}}
-                        specjalisto od <i>{{$ctrl.competence.Name}} </i>
-                        <button type="button" class="close" data-dismiss="alert">
-                            &times;</span>
-                        </button>
-                  </div>`,
+        template: `<h4 class="card-title text-center">{{$index + 1}}. {{competence.Name | lowercase| uppercase}}</h4>
+            <div class="card-body">
+                <img class="card-img-top" ng-src="{{'assets/' +  competence.Picture}}">
+                <h6 class="card-title font-weight-bold" 
+                    ng-class="{'competence-level-low': competence.Level < 3, 
+                                'competence-level-high': competence.Level > 3}">
+                    Poziom: {{competence.Level| asText:false}}
+                </h6>
+                <p class="card-text" ng-if="competence.Description">Opis: {{competence.Description}}</p>
+            </div>`,
         controller: function(){
             this.user = {Company: 'WSB'};
         }
