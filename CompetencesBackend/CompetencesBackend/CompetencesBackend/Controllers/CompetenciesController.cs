@@ -17,7 +17,7 @@ namespace CompetencesBackend.Controllers
         public IHttpActionResult List() {
             return Ok(new List<object>()
             {
-                new { Id= 1, Name= "Bootstrap", Level= 4, Picture= "bootstrap.svg", Description= "Wersja 3" },
+                new { Id= 1, Name= "Boootstrap", Level= 4, Picture= "bootstrap.svg", Description= "Wersja 3" },
                 new{ Id= 2, Name= "AngularJS", Level= 0, Picture= "angularjs.png", Description= "" },
                 new{ Id= 3, Name= "Angular", Level= 4, Picture= "angular.png", Description= "" },
                 new{ Id= 4, Name= "Ionic", Level= 4, Picture= "ionic.png", Description= "Wersja 2" },
