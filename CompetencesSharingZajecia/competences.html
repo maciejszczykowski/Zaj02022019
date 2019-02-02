@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Competences</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/competences.js"></script>
+
+    <style>
+        .competence-level-low{
+            color: red;
+        }
+        .competence-level-high{
+            color: green;
+        }
+        .flex-wrap{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body ng-app="appCompetencies" ng-controller="listController">
+    <div class="flex-wrap">
+        <div class="card" style="width: 12rem;" ng-repeat="competence in competencies| orderBy:'-Name'" ng-if="competence.Level > 0">
+            <h4 class="card-title text-center">{{$index + 1}}. {{competence.Name | lowercase| uppercase}}</h4>
+            <div class="card-body">
+                <img class="card-img-top" ng-src="{{'assets/' +  competence.Picture}}">
+                <h6 class="card-title font-weight-bold" 
+                    ng-class="{'competence-level-low': competence.Level < 3, 
+                                'competence-level-high': competence.Level > 3}">
+                    Poziom: {{competence.Level| asText:false}}
+                </h6>
+                <p class="card-text" ng-if="competence.Description">Opis: {{competence.Description}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5"></div>
+    <footer ng-include="'footer.html'"></footer>
+</body>
+<script>
+    var app = angular.module("appCompetencies", []);
+    app.filter('asText', function(){
+        return function(input, reverseScale){
+            if(reverseScale){ //dla true
+                switch (input) {
+                    case 0:
+                        return "Brak"; 
+                    case 1:
+                        return "B. wysoki";                        
+                    case 2:
+                        return "Wysoki";
+                    case 3:
+                        return "Średni"; 
+                    case 4:                       
+                        return "Niski";
+                    case 5:
+                        return "B. niski";              
+                    default:
+                        return "Brak nazwy";     
+                }  
+            }
+            else{ //dla false
+                switch (input) {
+                    case 0:
+                        return "Brak"; 
+                    case 1:
+                        return "B. niski"; 
+                    case 2:
+                        return "Niski"; 
+                    case 3:
+                        return "Średni"; 
+                    case 4:
+                        return "Wysoki";
+                    case 5:
+                        return "B. wysoki";                 
+                    default:
+                        return "Brak nazwy";     
+                }  
+            }
+            //if/switch
+        };
+    });
+    app.controller("listController", function($scope){
+        $scope.competencies = competenciesList;       
+        $scope.competenciesLevels = [1,2,3,4,5,6,7];
+    });
+</script>
+</html>
